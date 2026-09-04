@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Software Courses - Oferta Académica</title>
+  
+  <style>
+    /* VARIABLES DE ESTILO Y DISEÑO RENOVADO */
+    :root {
+      --bg-color: #0f172a;
+      --card-bg: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent-color: #38bdf8;
+      --btn-hover: #0284c7;
+      --border-color: #334155;
+      --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-family);
+      padding: 20px;
+    }
+
+    /* ENCABEZADO Y LOGO PERSONALIZADO */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto 30px auto;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    /* LOGO AGRANDADO Y DINÁMICO */
+    .brand-img {
+      width: 65px;
+      height: 65px;
+      object-fit: cover;
+      border-radius: 50%;
+      cursor: pointer;
+      animation: pulseGlow 3s infinite alternate ease-in-out;
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .brand-img:hover {
+      transform: scale(1.15) rotate(8deg);
+    }
+
+    @keyframes pulseGlow {
+      0% {
+        box-shadow: 0 0 8px rgba(56, 189, 248, 0.4), 0 0 15px rgba(56, 189, 248, 0.2);
+      }
+      100% {
+        box-shadow: 0 0 20px rgba(56, 189, 248, 0.9), 0 0 35px rgba(56, 189, 248, 0.6);
+      }
+    }
+
+    .brand-logo h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--accent-color);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .btn-update {
+      background-color: var(--accent-color);
+      color: #0f172a;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn-update:hover {
+      background-color: var(--btn-hover);
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    /* CONTENEDOR GRID RESPONSIVO (Requerimiento Funcional 1) */
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* TARJETAS */
+    .card {
+      background-color: var(--card-bg);
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    }
+
+    /* REQUERIMIENTO FUNCIONAL 2: EFECTO HOVER EN IMAGEN (+10% TAMAÑO) */
+    .card-img-container {
+      width: 100%;
+      height: 180px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .card-img-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .card-img-container:hover img {
+      transform: scale(1.1);
+    }
+
+    .card-content {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    /* LOGOTIPO JUNTO AL NOMBRE DE LA INSTITUCIÓN */
+    .institution-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .institution-logo {
+      width: 22px;
+      height: 22px;
+      object-fit: contain;
+    }
+
+    .card-institution {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent-color);
+      text-transform: uppercase;
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      color: var(--text-main);
+    }
+
+    .card-duration {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .card-description {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-bottom: 15px;
+      flex-grow: 1;
+    }
+
+    /* SECCIÓN DE PRECIOS Y DIVISAS */
+    .price-section {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-top: 1px solid var(--border-color);
+      margin-bottom: 15px;
+    }
+
+    .price-item {
+      text-align: center;
+    }
+
+    .price-item label {
+      display: block;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    .price-item span {
+      font-weight: bold;
+      font-size: 0.85rem;
+      color: var(--text-main);
+    }
+
+    .btn-enroll {
+      background-color: transparent;
+      border: 1px solid var(--accent-color);
+      color: var(--accent-color);
+      padding: 10px;
+      border-radius: 6px;
+      width: 100%;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .btn-enroll:hover {
+      background-color: rgba(56, 189, 248, 0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ENCABEZADO CON LOGO DINÁMICO -->
+  <header>
+    <div class="brand-logo">
+      <img src="curses soft.png" alt="Software Courses Logo" class="brand-img">
+      <h1>Software Courses</h1>
+    </div>
+    <button class="btn-update" id="update-prices-btn">Actualizar Precios</button>
+  </header>
+
+  <!-- OFERTA ACADÉMICA -->
+  <main class="courses-grid">
+
+    <!-- Curso 1 -->
+    <div class="card">
+      <div class="card-img-container">
+        <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=600&q=80" alt="React y TypeScript">
+      </div>
+      <div class="card-content">
+        <div class="institution-box">
+          <img src="Escudo_unach3.png" alt="UNACH Logo" class="institution-logo">
+          <span class="card-institution">UNACH</span>
+        </div>
+        <h2 class="card-title">Desarrollo Web con React y TypeScript</h2>
+        <p class="card-duration">⏱️ Duración: 35 horas</p>
+        <p class="card-description">Aprende a construir interfaces dinámicas, escalables y tipadas utilizando componentes modernos, hooks y gestión de estado.</p>
+        <div class="price-section">
+          <div class="price-item"><label>Precio MXN</label><span>$1,800.00</span></div>
+          <div class="price-item"><label>Precio USD</label><span class="price-usd">$95.00</span></div>
+          <div class="price-item"><label>Precio JPY</label><span class="price-jpy">¥10,200</span></div>
+        </div>
+        <button class="btn-enroll">Inscribirse</button>
+      </div>
+    </div>
+
+    <!-- Curso 2 -->
+    <div class="card">
+      <div class="card-img-container">
+        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80" alt="Microservicios">
+      </div>
+      <div class="card-content">
+        <div class="institution-box">
+          <img src="escudo_unam.png" alt="UNAM Logo" class="institution-logo">
+          <span class="card-institution">UNAM</span>
+        </div>
+        <h2 class="card-title">Arquitectura Microservicios con Node.js</h2>
+        <p class="card-duration">⏱️ Duración: 40 horas</p>
+        <p class="card-description">Diseña y despliega sistemas distribuidos con contenedores Docker, API Gateways y bases de datos NoSQL.</p>
+        <div class="price-section">
+          <div class="price-item"><label>Precio MXN</label><span>$2,200.00</span></div>
+          <div class="price-item"><label>Precio USD</label><span class="price-usd">$115.00</span></div>
+          <div class="price-item"><label>Precio JPY</label><span class="price-jpy">¥12,500</span></div>
+        </div>
+        <button class="btn-enroll">Inscribirse</button>
+      </div>
+    </div>
+
+    <!-- Curso 3 -->
+    <div class="card">
+      <div class="card-img-container">
+        <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=600&q=80" alt="Ciberseguridad">
+      </div>
+      <div class="card-content">
+        <div class="institution-box">
+          <img src="escudo_ipn.png" alt="IPN Logo" class="institution-logo">
+          <span class="card-institution">IPN</span>
+        </div>
+        <h2 class="card-title">Ciberseguridad y Ethical Hacking</h2>
+        <p class="card-duration">⏱️ Duración: 30 horas</p>
+        <p class="card-description">Identifica vulnerabilidades en aplicaciones web, realiza pruebas de penetración y aplica protocolos de protección de datos.</p>
+        <div class="price-section">
+          <div class="price-item"><label>Precio MXN</label><span>$1,950.00</span></div>
+          <div class="price-item"><label>Precio USD</label><span class="price-usd">$102.00</span></div>
+          <div class="price-item"><label>Precio JPY</label><span class="price-jpy">¥11,100</span></div>
+        </div>
+        <button class="btn-enroll">Inscribirse</button>
+      </div>
+    </div>
+
+    <!-- Curso 4 -->
+    <div class="card">
+      <div class="card-img-container">
+        <img src="https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=600&q=80" alt="Bases de Datos">
+      </div>
+      <div class="card-content">
+        <div class="institution-box">
+          <img src="escudo_itesm.png" alt="ITESM Logo" class="institution-logo">
+          <span class="card-institution">ITESM</span>
+        </div>
+        <h2 class="card-title">Optimización de Consultas e Ingeniería de Datos</h2>
+        <p class="card-duration">⏱️ Duración: 25 horas</p>
+        <p class="card-description">Domina el modelado avanzado en PostgreSQL, indexación, análisis masivo de datos y diseño de pipelines ETL.</p>
+        <div class="price-section">
+          <div class="price-item"><label>Precio MXN</label><span>$1,600.00</span></div>
+          <div class="price-item"><label>Precio USD</label><span class="price-usd">$84.00</span></div>
+          <div class="price-item"><label>Precio JPY</label><span class="price-jpy">¥9,100</span></div>
+        </div>
+        <button class="btn-enroll">Inscribirse</button>
+      </div>
+    </div>
+
+    <!-- Curso 5 -->
+    <div class="card">
+      <div class="card-img-container">
+        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=600&q=80" alt="Desarrollo Movil">
+      </div>
+      <div class="card-content">
+        <div class="institution-box">
+          <img src="escudo_unam.png" alt="UNAM Logo" class="institution-logo">
+          <span class="card-institution">UNAM</span>
+        </div>
+        <h2 class="card-title">Desarrollo Móvil Multiplataforma con Flutter</h2>
+        <p class="card-duration">⏱️ Duración: 28 horas</p>
+        <p class="card-description">Crea aplicaciones nativas para Android e iOS desde un solo código base integrando APIs REST en tiempo real.</p>
+        <div class="price-section">
+          <div class="price-item"><label>Precio MXN</label><span>$1,450.00</span></div>
+          <div class="price-item"><label>Precio USD</label><span class="price-usd">$76.00</span></div>
+          <div class="price-item"><label>Precio JPY</label><span class="price-jpy">¥8,250</span></div>
+        </div>
+        <button class="btn-enroll">Inscribirse</button>
+      </div>
+    </div>
+
+    <!-- Curso 6 -->
+    <div class="card">
+      <div class="card-img-container">
+        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80" alt="Desarrollo Web SPA">
+      </div>
+      <div class="card-content">
+        <div class="institution-box">
+          <img src="escudo_udg.png" alt="UDG Logo" class="institution-logo">
+          <span class="card-institution">UDG</span>
+        </div>
+        <h2 class="card-title">Desarrollo Web Frontend SPA</h2>
+        <p class="card-duration">⏱️ Duración: 30 horas</p>
+        <p class="card-description">Domina la creación de Single Page Applications utilizando estándares modernos de HTML, CSS y JS.</p>
+        <div class="price-section">
+          <div class="price-item"><label>Precio MXN</label><span>$1,600.00</span></div>
+          <div class="price-item"><label>Precio USD</label><span class="price-usd">$85.00</span></div>
+          <div class="price-item"><label>Precio JPY</label><span class="price-jpy">¥9,200</span></div>
+        </div>
+        <button class="btn-enroll">Inscribirse</button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- REQUERIMIENTO FUNCIONAL 3: CONEXIÓN API REST -->
+  <script>
+    document.getElementById('update-prices-btn').addEventListener('click', async () => {
+      const btn = document.getElementById('update-prices-btn');
+      btn.innerText = 'Cargando...';
+
+      try {
+        const response = await fetch('https://open.er-api.com/v6/latest/MXN');
+        const data = await response.json();
+
+        if (data && data.rates) {
+          const mxnToUsd = data.rates.USD;
+          const mxnToJpy = data.rates.JPY;
+
+          const cards = document.querySelectorAll('.card');
+
+          cards.forEach(card => {
+            const mxnText = card.querySelector('.price-section .price-item:first-child span').innerText;
+            const mxnValue = parseFloat(mxnText.replace('$', '').replace(',', ''));
+
+            const newUsd = (mxnValue * mxnToUsd).toFixed(2);
+            const newJpy = Math.round(mxnValue * mxnToJpy);
+
+            card.querySelector('.price-usd').innerText = `$${newUsd}`;
+            card.querySelector('.price-jpy').innerText = `¥${newJpy.toLocaleString()}`;
+          });
+
+          alert('¡Precios actualizados exitosamente con el tipo de cambio actual!');
+        } else {
+          alert('No se pudo obtener la información de las divisas.');
+        }
+      } catch (error) {
+        console.error('Error al conectar con la API REST:', error);
+        alert('Ocurrió un error al intentar actualizar los precios.');
+      } finally {
+        btn.innerText = 'Actualizar Precios';
+      }
+    });
+  </script>
+</body>
+</html>
