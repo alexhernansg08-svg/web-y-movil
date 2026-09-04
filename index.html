@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portafolio de Prácticas</title>
+  <style>
+    :root {
+      --bg-color: #0f172a;
+      --card-bg: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent-color: #38bdf8;
+      --border-color: #334155;
+      --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-family);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      color: var(--accent-color);
+      margin-bottom: 10px;
+    }
+
+    header p {
+      color: var(--text-muted);
+    }
+
+    .portfolio-container {
+      width: 100%;
+      max-width: 800px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .practice-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .practice-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent-color);
+    }
+
+    .practice-info h2 {
+      font-size: 1.25rem;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .practice-info p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .btn-link {
+      background-color: var(--accent-color);
+      color: #0f172a;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-link:hover {
+      background-color: #0284c7;
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Portafolio de Prácticas Web</h1>
+    <p>Desarrollo de Aplicaciones Web y Móviles</p>
+  </header>
+
+  <main class="portfolio-container">
+    
+    <!-- TARJETA DE ACCESO A LA PRÁCTICA 1 -->
+    <div class="practice-card">
+      <div class="practice-info">
+        <h2>Práctica 1: Software Courses</h2>
+        <p>Aplicación Web SPA responsiva con catálogo de cursos, efecto hover y API REST de divisas.</p>
+      </div>
+      <!-- Enlace relativo a la carpeta practica1 -->
+      <a href="./practica1/index.html" class="btn-link">Ver Práctica 1</a>
+    </div>
+
+  </main>
+
+</body>
+</html>
